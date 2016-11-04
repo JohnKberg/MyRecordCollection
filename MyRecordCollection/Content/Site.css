@@ -22,3 +22,21 @@ select,
 textarea {
     max-width: 280px;
 }
+
+
+.clickable > td:hover {
+    cursor:pointer;
+}
+
+/* Left align dt elements in bootstrap dl-horizontal lists*/
+@media (min-width: 768px) {
+    .dl-horizontal.left-align dt {
+        text-align: left;
+    }
+}
+
+
+span.glyphicon 
+{
+    margin-right:7px;
+}

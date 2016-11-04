@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using MyRecordCollection.Models;
 using MyRecordCollection.ViewModels;
+using AutoMapper;
 
 namespace MyRecordCollection.Controllers
 {
@@ -56,7 +57,10 @@ namespace MyRecordCollection.Controllers
             {
                 return HttpNotFound();
             }
-            return View(artist);
+
+            var artistFormVm = Mapper.Map<Artist, ArtistFormViewModel>(artist);
+
+            return View("ArtistForm", artistFormVm);
         }
 
         // POST: Artists/Edit/5
@@ -87,7 +91,12 @@ namespace MyRecordCollection.Controllers
             else
             {
                 //EDIT
-                db.Entry(artistVm).State = EntityState.Modified;
+                var artistInDb = db.Artists.Find(artistVm.Id);
+                Mapper.Map<ArtistFormViewModel, Artist>
+                    (
+                    source: artistVm, 
+                    destination: artistInDb
+                    );
                 db.SaveChanges();
             }
                 
