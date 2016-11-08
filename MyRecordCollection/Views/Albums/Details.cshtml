@@ -1,0 +1,56 @@
+﻿@model MyRecordCollection.Models.Album
+
+@{
+    ViewBag.Title = Model.Artist.Name + " - " + Model.Title;
+}
+
+<h2>@Html.DisplayFor(model => model.Artist.Name) - @Html.DisplayFor(model => model.Title)</h2>
+
+<div>
+    <hr />
+    <div style="max-width:500px;">
+        <img class="img-responsive" src="@Model.ImageUrl">
+    </div>
+
+    <dl class="dl-horizontal left-align">
+        <dt>
+            @Html.DisplayNameFor(model => model.Year)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Year)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Label)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Label)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Format)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Format)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+    </dl>
+</div>
+<p>
+    <a href="@Url.Action("Index")" class="btn btn-default">
+        <span class="glyphicon glyphicon-arrow-left"></span>Back to List
+    </a>
+    <a href="@Url.Action("Edit", new { id = Model.Id })" class="btn btn-default">
+        <span class="glyphicon glyphicon-edit"></span>Edit
+    </a>
+</p>

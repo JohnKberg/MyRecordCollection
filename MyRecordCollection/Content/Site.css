@@ -16,14 +16,6 @@
     white-space: normal;
 }
 
-/* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
-    max-width: 280px;
-}
-
-
 .clickable > td:hover {
     cursor:pointer;
 }
@@ -39,4 +31,18 @@ textarea {
 span.glyphicon 
 {
     margin-right:7px;
+}
+
+/* Search bar */
+.stylish-input-group .input-group-addon{
+    background: white !important; 
+}
+.stylish-input-group .form-control{
+	border-right:0; 
+	box-shadow:0 0 0; 
+	border-color:#ccc;
+}
+.stylish-input-group button{
+    border:0;
+    background:transparent;
 }
