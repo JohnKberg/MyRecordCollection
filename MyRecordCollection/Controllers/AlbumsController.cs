@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using MyRecordCollection.Models;
 using MyRecordCollection.ViewModels;
 using AutoMapper;
+using PagedList;
 
 namespace MyRecordCollection.Controllers
 {
@@ -17,15 +18,32 @@ namespace MyRecordCollection.Controllers
 		private ApplicationDbContext db = new ApplicationDbContext();
 
 		// GET: Albums
-		public ActionResult Index(string sortOrder, string searchString)
+		public ActionResult Index(string sortOrder, string searchString, string currentFilter, int? page)
 		{
+            int PageSize = 5;
+            int PageNumber = (page ?? 1);
+
+
 			ViewBag.Title = "My Albums";
 
+            ViewBag.CurrentSort = sortOrder;
+            
 			// Assign sort string for sorting links
 			ViewBag.ArtistSort = String.IsNullOrEmpty(sortOrder) ? "Artist_desc" : "";
 			ViewBag.AlbumSort = sortOrder == "Album" ? "Album_desc" : "Album";
 			ViewBag.YearSort = sortOrder == "Year" ? "Year_desc" : "Year";
 			ViewBag.LabelSort = sortOrder == "Label" ? "Label_desc" : "Label";
+
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
 
 			var albums = db.Albums.Include(a => a.Artist);
 
@@ -66,7 +84,7 @@ namespace MyRecordCollection.Controllers
 					break;
 			}
 
-			return View(albums.ToList());
+            return View(albums.ToPagedList(PageNumber, PageSize));
 		}
 
 		// GET: Albums/Details/5
@@ -87,7 +105,6 @@ namespace MyRecordCollection.Controllers
 		// GET: Albums/Create
 		public ActionResult Create()
 		{
-			ViewBag.Title = "Create Album";
 			var vm = new AlbumFormViewModel
 			{
 
@@ -119,7 +136,6 @@ namespace MyRecordCollection.Controllers
 		// GET: Albums/Edit/5
 		public ActionResult Edit(int? id)
 		{
-			ViewBag.Title = "Edit Album";
 			if (id == null)
 			{
 				return new HttpStatusCodeResult(HttpStatusCode.BadRequest);

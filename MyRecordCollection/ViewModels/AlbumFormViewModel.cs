@@ -15,7 +15,8 @@ namespace MyRecordCollection.ViewModels
         [StringLength(255)]
         public string Title { get; set; }
 
-        public Int16 Year { get; set; }
+        [Required]
+        public Int16? Year { get; set; }
 
         [StringLength(100)]
         public string Label { get; set; }
@@ -31,5 +32,10 @@ namespace MyRecordCollection.ViewModels
         public int ArtistId { get; set; }
 
         public IEnumerable<SelectListItem> ArtistsList { get; set; }
+
+        public String PageTitle 
+        {
+            get { return this.Id != 0 ? "Edit Album" : "Add Album"; } 
+        }
     }
 }
