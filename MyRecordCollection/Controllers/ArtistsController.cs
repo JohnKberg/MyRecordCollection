@@ -34,6 +34,12 @@ namespace MyRecordCollection.Controllers
             {
                 return HttpNotFound();
             }
+
+            // "Lazy Loading"
+            // If we declare Artist.Albums as virtual ICollection<Album> we don't need to load albums like below
+            // or with .Include() on db.Artists collection above
+            //artist.Albums = db.Albums.Where(album => album.ArtistId == id);
+
             return View(artist);
         }
 

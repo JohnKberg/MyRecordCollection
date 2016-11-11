@@ -16,6 +16,9 @@ namespace MyRecordCollection.Models
         
         public string Bio { get; set; }
 
-        public IEnumerable<Album> Albums { get; set; }
+        // Declared as virtual to enable "Lazy Loading"
+        // Which means you don't have to load this collection explicitly 
+        // with .Include() statement on Artist collection
+        public virtual ICollection<Album> Albums { get; set; }
     }
 }
