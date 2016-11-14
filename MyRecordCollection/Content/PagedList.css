@@ -19,6 +19,11 @@
   text-decoration: none;
   background-color: #ffffff;
   border: 1px solid #dddddd;
+  
+    
+    border-width: 0 1px 4px 1px; /* Added for Bootswatch Lumen Theme */
+
+
 }
 
 .pagination > li:first-child > a,
@@ -50,8 +55,8 @@
   z-index: 2;
   color: #ffffff;
   cursor: default;
-  background-color: #428bca;
-  border-color: #428bca;
+  background-color: #28b62c; /* orig: #428bca*/
+    border-color: #23a127; /* orig: #428bca*/
 }
 
 .pagination > .disabled > span,
@@ -137,6 +142,9 @@
   padding: 5px 14px;
   background-color: #ffffff;
   border: 1px solid #dddddd;
+
+  border-width: 0 1px 4px 1px; /* Added for Bootswatch Lumen Theme */
+
   border-radius: 15px;
 }
 

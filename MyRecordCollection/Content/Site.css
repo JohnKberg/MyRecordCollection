@@ -39,9 +39,10 @@ span.glyphicon
 /* Stylish input (used for Search bar) */
 .stylish-input-group .input-group-addon{
     background: white !important; 
+    border-color:#ccc;/* For Bootswatch Theme */
 }
 .stylish-input-group .form-control{
-	border-right:0; 
+	border-right:0;
 	box-shadow:0 0 0; 
 	border-color:#ccc;
 }
@@ -49,3 +50,4 @@ span.glyphicon
     border:0;
     background:transparent;
 }
+
