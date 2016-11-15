@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using MyRecordCollection.Models;
 using MyRecordCollection.ViewModels;
 using AutoMapper;
+using PagedList;
 
 namespace MyRecordCollection.Controllers
 {
@@ -17,9 +18,28 @@ namespace MyRecordCollection.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Artists
-        public ActionResult Index()
+        public ActionResult Index(string searchString, string currentFilter, int? page)
         {
-            return View(db.Artists.ToList());
+            int PageSize = 5;
+            int PageNumber = (page ?? 1);
+
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            IQueryable<Artist> artists = db.Artists.OrderBy(a => a.Name);
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                artists = artists.Where(a => a.Name.Contains(searchString)).OrderBy(a => a.Name);
+            }
+
+            return View(artists.ToPagedList(PageNumber, PageSize));
         }
 
         // GET: Artists/Details/5

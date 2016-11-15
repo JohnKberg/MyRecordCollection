@@ -1,21 +1,39 @@
-﻿@model IEnumerable<MyRecordCollection.Models.Artist>
+﻿@using PagedList.Mvc;
+@model PagedList.IPagedList<MyRecordCollection.Models.Artist>
 
 @{
     ViewBag.Title = "Index";
+}
+
+@section head_end
+{
+    <link href="~/Content/PagedList.css" rel="stylesheet" />
 }
 
 <h2>Artists</h2>
 
 <div class="panel panel-default">
     <div class="panel-heading">
-        <a href="@Url.Action("Create")" class="btn btn-success"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>Add New</a>
+        <div class="row">
+            <div class="col-sm-8 col-md-9"><a href="@Url.Action("Create")" class="btn btn-success"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>Add New</a></div>
+            <div style="height:7px;" class="visible-xs"></div>
+            <div class="col-sm-4 col-md-3">
+                <form class="form-inline" action="@Url.Action("Index")" method="get">
+                    <div class="input-group stylish-input-group full-width">
+                        @Html.TextBox("searchString", ViewBag.CurrentFilter as string, new { @class = "form-control", @id = "searchbox", @placeholder = "Search here" })
+                        <span class="input-group-addon">
+                            <button type="submit"><span class="glyphicon glyphicon-search"></span></button>
+                        </span>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
     <table class="table table-hover">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+                Name
             </th>
-
             <th></th>
         </tr>
 
@@ -42,8 +60,11 @@
         }
 
     </table>
-    <div class="panel-footer">
-        &nbsp;
+    <div class="panel-footer clearfix pagination-inline">
+        @Html.PagedListPager(Model, 
+        page => Url.Action("Index", new {page, currentFilter = ViewBag.CurrentFilter}),
+        new PagedListRenderOptions() { DisplayPageCountAndCurrentLocation = true }
+        )
     </div>
 </div>
 
