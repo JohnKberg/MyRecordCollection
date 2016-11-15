@@ -15,5 +15,11 @@ namespace MyRecordCollection.ViewModels
         public string Name { get; set; }
 
         public string Bio { get; set; }
+
+
+        public String PageTitle 
+        { 
+            get { return this.Id != 0 ? "Edit Artist" : "Add Artist"; } 
+        }
     }
 }
