@@ -204,16 +204,23 @@ namespace MyRecordCollection.Controllers
 		////////    return View(album);
 		////////}
 
-		////////// POST: Albums/Delete/5
-		////////[HttpPost, ActionName("Delete")]
-		////////[ValidateAntiForgeryToken]
-		////////public ActionResult DeleteConfirmed(int id)
-		////////{
-		////////    Album album = db.Albums.Find(id);
-		////////    db.Albums.Remove(album);
-		////////    db.SaveChanges();
-		////////    return RedirectToAction("Index");
-		////////}
+        // POST: Albums/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id, int? page, string sortOrder, string currentFilter)
+        {
+            Album album = db.Albums.Find(id);
+            db.Albums.Remove(album);
+            db.SaveChanges();
+
+            object routeValues = null;
+            if (page != null)
+                routeValues = new { page = page, sortOrder = sortOrder, currentFilter = currentFilter };
+            else
+                routeValues = new { sortOrder = sortOrder, currentFilter = currentFilter };
+
+            return RedirectToAction("Index", routeValues);
+        }
 
 		protected override void Dispose(bool disposing)
 		{
