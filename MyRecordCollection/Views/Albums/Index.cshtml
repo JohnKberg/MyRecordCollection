@@ -4,6 +4,7 @@
 @section head_end
 {
     <link href="~/Content/PagedList.css" rel="stylesheet" />
+    <link href="~/Content/no-more-tables.css" rel="stylesheet" />
 }
 
 @{
@@ -29,92 +30,96 @@
             </div>
         </div>
     </div>
-    <div class="table-responsive">
+    <div id="no-more-tables">
         <table class="table table-hover">
-            <tr>
-                <th>
+            <thead>
+                <tr>
+                    <th>
 
-                </th>
-                <th>
-                    @Html.ActionLink("Artist", "Index", new { sortOrder = ViewBag.ArtistSort, currentFilter = ViewBag.CurrentFilter })
-                </th>
-                <th>
-                    @Html.ActionLink("Title", "Index", new { sortOrder = ViewBag.AlbumSort, currentFilter = ViewBag.CurrentFilter })
-                </th>
-                <th>
-                    @Html.ActionLink("Year", "Index", new { sortOrder = ViewBag.YearSort, currentFilter = ViewBag.CurrentFilter })
-                </th>
-                <th class="hidden-xs hidden-sm">
-                    @Html.ActionLink("Label", "Index", new { sortOrder = ViewBag.LabelSort, currentFilter = ViewBag.CurrentFilter })
-                </th>
-                <th class="hidden-xs hidden-sm">
-                    Format
-                </th>
-                <th class="hidden-xs hidden-sm">
-                    Description
-                </th>
+                    </th>
+                    <th>
+                        @Html.ActionLink("Artist", "Index", new { sortOrder = ViewBag.ArtistSort, currentFilter = ViewBag.CurrentFilter })
+                    </th>
+                    <th>
+                        @Html.ActionLink("Title", "Index", new { sortOrder = ViewBag.AlbumSort, currentFilter = ViewBag.CurrentFilter })
+                    </th>
+                    <th>
+                        @Html.ActionLink("Year", "Index", new { sortOrder = ViewBag.YearSort, currentFilter = ViewBag.CurrentFilter })
+                    </th>
+                    <th class="hidden-xs hidden-sm">
+                        @Html.ActionLink("Label", "Index", new { sortOrder = ViewBag.LabelSort, currentFilter = ViewBag.CurrentFilter })
+                    </th>
+                    <th class="hidden-xs hidden-sm">
+                        Format
+                    </th>
+                    <th class="hidden-xs hidden-sm">
+                        Description
+                    </th>
 
-                <th></th>
-            </tr>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr class="clickable" onclick="window.location='@Url.Action("Details", new { id= item.Id})'">
+                        <td data-title="">
+                            <div style="width:auto;height:auto;min-width:75px;min-height:75px;max-width:100px;max-height:100px;">
+                                <img src="@item.ImageUrl" class="img-thumbnail img-responsive" />
+                            </div>
+                        </td>
+                        <td data-title="Artist">
+                            <strong>@Html.DisplayFor(modelItem => item.Artist.Name)</strong>
+                        </td>
+                        <td data-title="Title">
+                            @Html.DisplayFor(modelItem => item.Title)
+                        </td>
+                        <td data-title="Year">
+                            @Html.DisplayFor(modelItem => item.Year)
+                        </td>
+                        <td data-title="Label" class="hidden-xs hidden-sm">
+                            @Html.DisplayFor(modelItem => item.Label)
+                        </td>
+                        <td data-title="Format" class="hidden-xs hidden-sm">
+                            @Html.DisplayFor(modelItem => item.Format)
+                        </td>
+                        <td data-title="Description" class="hidden-xs hidden-sm">
+                            @Html.DisplayFor(modelItem => item.Description)
+                        </td>
 
-            @foreach (var item in Model)
-            {
-                <tr class="clickable" onclick="window.location='@Url.Action("Details", new { id= item.Id})'">
-                    <td>
-                        <div style="width:auto;height:auto;min-width:75px;min-height:75px;max-width:100px;max-height:100px;">
-                            <img src="@item.ImageUrl" class="img-thumbnail img-responsive" />
-                        </div>
-                    </td>
-                    <td>
-                        <strong>@Html.DisplayFor(modelItem => item.Artist.Name)</strong>
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Title)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Year)
-                    </td>
-                    <td class="hidden-xs hidden-sm">
-                        @Html.DisplayFor(modelItem => item.Label)
-                    </td>
-                    <td class="hidden-xs hidden-sm">
-                        @Html.DisplayFor(modelItem => item.Format)
-                    </td>
-                    <td class="hidden-xs hidden-sm">
-                        @Html.DisplayFor(modelItem => item.Description)
-                    </td>
-
-                    <td class="text-right">
-                        <div class="btn-group" role="group" aria-label="albums toolbar">
-                            <a href="@Url.Action("Edit", new { id = item.Id })" class="btn btn-default">
-                                <span class="glyphicon glyphicon-edit"></span>Edit
-                            </a>
-                            <a href="@Url.Action("Details", new { id = item.Id })" class="btn btn-default">
-                                <span class="glyphicon glyphicon-list-alt"></span>Details
-                            </a>
+                        <td data-title="" class="text-right">
                             <form action="@Url.Action("Delete", new { id = item.Id })" method="post">
                                 @Html.AntiForgeryToken()
-                                @if(ViewBag.CurrentSort != null)
-                                { 
-                                    <input type="hidden" name="sortOrder" value="@ViewBag.CurrentSort" />
-                                }
-                                @if (ViewBag.CurrentFilter != null)
-                                {
-                                    <input type="hidden" name="currentFilter" value="@ViewBag.CurrentFilter" />
-                                }
-                                @if (Model.PageNumber > 1)
-                                {
-                                    <input type="hidden" name="page" value="@Model.PageNumber" />
-                                }
-                                <button type="submit" class="btn btn-default js-delete" >
-                                    <span class="glyphicon glyphicon-trash"></span>Delete
-                                </button>
-                            </form>
-                        </div>
-                    </td>
-                </tr>
-            }
+                                <div class="btn-group" role="group" aria-label="albums toolbar">
 
+                                    <a href="@Url.Action("Details", new { id = item.Id })" class="btn btn-default" title="Details">
+                                        <span class="glyphicon glyphicon-list-alt"></span><span class="visible-lg-inline">Details</span>
+                                    </a>
+                                    <a href="@Url.Action("Edit", new { id = item.Id })" class="btn btn-default" title="Edit">
+                                        <span class="glyphicon glyphicon-edit"></span><span class="visible-lg-inline">Edit</span>
+                                    </a>
+                                    @if (ViewBag.CurrentSort != null)
+                                    {
+                                        <input type="hidden" name="sortOrder" value="@ViewBag.CurrentSort" />
+                                    }
+                                    @if (ViewBag.CurrentFilter != null)
+                                    {
+                                        <input type="hidden" name="currentFilter" value="@ViewBag.CurrentFilter" />
+                                    }
+                                    @if (Model.PageNumber > 1)
+                                    {
+                                        <input type="hidden" name="page" value="@Model.PageNumber" />
+                                    }
+                                    <button type="submit" class="btn btn-default js-delete" title="Delete">
+                                        <span class="glyphicon glyphicon-trash"></span><span class="visible-lg-inline">Delete</span>
+                                    </button>
+
+                                </div>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
         </table>
     </div>
     <div class="panel-footer clearfix pagination-inline">

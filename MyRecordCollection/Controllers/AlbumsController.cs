@@ -214,7 +214,7 @@ namespace MyRecordCollection.Controllers
             db.SaveChanges();
 
             object routeValues = null;
-            if (page != null)
+            if (page.HasValue)
                 routeValues = new { page = page, sortOrder = sortOrder, currentFilter = currentFilter };
             else
                 routeValues = new { sortOrder = sortOrder, currentFilter = currentFilter };

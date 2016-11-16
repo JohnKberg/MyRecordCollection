@@ -8,64 +8,94 @@
 @section head_end
 {
     <link href="~/Content/PagedList.css" rel="stylesheet" />
+    <link href="~/Content/no-more-tables.css" rel="stylesheet" />
 }
 
 <h2>Artists</h2>
-
-<div class="panel panel-default">
-    <div class="panel-heading">
-        <div class="row">
-            <div class="col-sm-8 col-md-9"><a href="@Url.Action("Create")" class="btn btn-success"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>Add New</a></div>
-            <div style="height:7px;" class="visible-xs"></div>
-            <div class="col-sm-4 col-md-3">
-                <form class="form-inline" action="@Url.Action("Index")" method="get">
-                    <div class="input-group stylish-input-group full-width">
-                        @Html.TextBox("searchString", ViewBag.CurrentFilter as string, new { @class = "form-control", @id = "searchbox", @placeholder = "Search here" })
-                        <span class="input-group-addon">
-                            <button type="submit"><span class="glyphicon glyphicon-search"></span></button>
-                        </span>
+<div class="row">
+    <div class="col-md-10">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-sm-7"><a href="@Url.Action("Create")" class="btn btn-success"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>Add New</a></div>
+                    <div style="height:7px;" class="visible-xs"></div>
+                    <div class="col-sm-5">
+                        <form class="form-inline" action="@Url.Action("Index")" method="get">
+                            <div class="input-group stylish-input-group full-width">
+                                @Html.TextBox("searchString", ViewBag.CurrentFilter as string, new { @class = "form-control", @id = "searchbox", @placeholder = "Search here" })
+                                <span class="input-group-addon">
+                                    <button type="submit"><span class="glyphicon glyphicon-search"></span></button>
+                                </span>
+                            </div>
+                        </form>
                     </div>
-                </form>
+                </div>
             </div>
-        </div>
-    </div>
-    <table class="table table-hover">
-        <tr>
-            <th>
-                Name
-            </th>
-            <th></th>
-        </tr>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>
+                            Name
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr class="clickable" onclick="window.location='@Url.Action("Details", new { id= item.Id})'">
+                            <td data-title="Name">
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </td>
+                            <td data-title="" class="text-right">
+                                <form action="@Url.Action("Delete", new { id = item.Id })" method="post">
+                                    @Html.AntiForgeryToken()
+                                    <div class="btn-group" role="group" aria-label="artists toolbar">
 
-        @foreach (var item in Model)
-        {
-            <tr class="clickable" onclick="window.location='@Url.Action("Details", new { id= item.Id})'">
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td class="text-right">
-                    <div class="btn-group" role="group" aria-label="artists toolbar">
-                        <a href="@Url.Action("Edit", new { id = item.Id })" class="btn btn-default">
-                            <span class="glyphicon glyphicon-edit"></span>Edit
-                        </a>
-                        <a href="@Url.Action("Details", new { id = item.Id })" class="btn btn-default">
-                            <span class="glyphicon glyphicon-list-alt"></span>Details
-                        </a>
-                        <a href="@Url.Action("Delete", new { id = item.Id })" class="btn btn-default">
-                            <span class="glyphicon glyphicon-trash"></span>Delete
-                        </a>
-                    </div>
-                </td>
-            </tr>
-        }
-
-    </table>
-    <div class="panel-footer clearfix pagination-inline">
-        @Html.PagedListPager(Model, 
-        page => Url.Action("Index", new {page, currentFilter = ViewBag.CurrentFilter}),
+                                        <a href="@Url.Action("Details", new { id = item.Id })" class="btn btn-default" title="Details">
+                                            <span class="glyphicon glyphicon-list-alt"></span><span class="visible-lg-inline">Details</span>
+                                        </a>
+                                        <a href="@Url.Action("Edit", new { id = item.Id })" class="btn btn-default" title="Edit">
+                                            <span class="glyphicon glyphicon-edit"></span><span class="visible-lg-inline">Edit</span>
+                                        </a>
+                                        @if (ViewBag.CurrentFilter != null)
+                                        {
+                                            <input type="hidden" name="currentFilter" value="@ViewBag.CurrentFilter" />
+                                        }
+                                        @if (Model.PageNumber > 1)
+                                        {
+                                            <input type="hidden" name="page" value="@Model.PageNumber" />
+                                        }
+                                        <button type="submit" class="btn btn-default js-delete">
+                                            <span class="glyphicon glyphicon-trash"></span><span class="visible-lg-inline">Delete</span>
+                                        </button>
+                                    </div>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <div class="panel-footer clearfix pagination-inline">
+                @Html.PagedListPager(Model,
+        page => Url.Action("Index", new { page, currentFilter = ViewBag.CurrentFilter }),
         new PagedListRenderOptions() { DisplayPageCountAndCurrentLocation = true }
         )
-    </div>
-</div>
+            </div>
+        </div>
+        </div></div>
+        @section scripts
+{
+            <script>
+                $(document).ready(function () {
 
+                    $(".js-delete").click(function (event) {
 
+                        event.stopPropagation(); //Always stop click event on tr element
+                        if (!confirm('Deleting an Artist will also delete all Albums registered for that Artist.\r\n\r\nDelete artist?')) {
+                            event.preventDefault(); //Stop this click event (submit)
+                        }
+                    });
+                });
+            </script>
+        }

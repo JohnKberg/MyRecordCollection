@@ -58,7 +58,7 @@ namespace MyRecordCollection.Controllers
             // "Lazy Loading"
             // If we declare Artist.Albums as virtual ICollection<Album> we don't need to load albums like below
             // or with .Include() on db.Artists collection above
-            //artist.Albums = db.Albums.Where(album => album.ArtistId == id);
+            //OFF: artist.Albums = db.Albums.Where(album => album.ArtistId == id);
 
             return View(artist);
         }
@@ -129,6 +129,22 @@ namespace MyRecordCollection.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id, int? page, string currentFilter)
+        {
+            var artist = db.Artists.Find(id);
+            db.Artists.Remove(artist);
+            db.SaveChanges();
+
+            object routeValues;
+            if(page.HasValue)
+                routeValues = new { page = page, currentFilter = currentFilter };
+            else
+                routeValues = new { currentFilter = currentFilter };
+
+            return RedirectToAction("Index", routeValues);
+        }
 
         protected override void Dispose(bool disposing)
         {
