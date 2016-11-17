@@ -194,12 +194,37 @@
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\AlbumFormViewModel.cs" />
     <Compile Include="ViewModels\ArtistFormViewModel.cs" />
+    <Compile Include="ViewModels\HomePageViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\MyRecordCollection.mdf" />
     <Content Include="App_Data\MyRecordCollection_log.ldf">
       <DependentUpon>MyRecordCollection.mdf</DependentUpon>
     </Content>
+    <Content Include="Content\blueimpGallery\css\blueimp-gallery-indicator.css" />
+    <Content Include="Content\blueimpGallery\css\blueimp-gallery-video.css" />
+    <Content Include="Content\blueimpGallery\css\blueimp-gallery.css" />
+    <Content Include="Content\blueimpGallery\css\blueimp-gallery.min.css" />
+    <Content Include="Content\blueimpGallery\css\demo.css" />
+    <Content Include="Content\blueimpGallery\img\error.png" />
+    <Content Include="Content\blueimpGallery\img\error.svg" />
+    <Content Include="Content\blueimpGallery\img\loading.gif" />
+    <Content Include="Content\blueimpGallery\img\play-pause.png" />
+    <Content Include="Content\blueimpGallery\img\play-pause.svg" />
+    <Content Include="Content\blueimpGallery\img\video-play.png" />
+    <Content Include="Content\blueimpGallery\img\video-play.svg" />
+    <Content Include="Content\blueimpGallery\js\blueimp-gallery-fullscreen.js" />
+    <Content Include="Content\blueimpGallery\js\blueimp-gallery-indicator.js" />
+    <Content Include="Content\blueimpGallery\js\blueimp-gallery-video.js" />
+    <Content Include="Content\blueimpGallery\js\blueimp-gallery-vimeo.js" />
+    <Content Include="Content\blueimpGallery\js\blueimp-gallery-youtube.js" />
+    <Content Include="Content\blueimpGallery\js\blueimp-gallery.js" />
+    <Content Include="Content\blueimpGallery\js\blueimp-gallery.min.js" />
+    <Content Include="Content\blueimpGallery\js\blueimp-helper.js" />
+    <Content Include="Content\blueimpGallery\js\demo.js" />
+    <Content Include="Content\blueimpGallery\js\jquery.blueimp-gallery.js" />
+    <Content Include="Content\blueimpGallery\js\jquery.blueimp-gallery.min.js" />
+    <Content Include="Content\blueimpGallery\js\vendor\jquery.js" />
     <Content Include="Content\bootstrap-lumen.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -219,6 +244,10 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap.min.css.map" />
     <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\blueimpGallery\css\blueimp-gallery.less" />
+    <Content Include="Content\blueimpGallery\css\blueimp-gallery.min.css.map" />
+    <Content Include="Content\blueimpGallery\js\blueimp-gallery.min.js.map" />
+    <Content Include="Content\blueimpGallery\js\jquery.blueimp-gallery.min.js.map" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />

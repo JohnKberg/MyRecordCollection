@@ -8,7 +8,6 @@
     @Scripts.Render("~/bundles/modernizr")
 
     @RenderSection("head_end", false)
-
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -33,6 +32,7 @@
             </div>
         </div>
     </div>
+    @RenderSection("headerbar", required: false)
     <div class="container body-content">
         @RenderBody()
         <hr />
