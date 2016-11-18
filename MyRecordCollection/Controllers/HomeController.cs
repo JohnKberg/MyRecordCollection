@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Data.Entity;
+using MyRecordCollection.Utils;
 
 namespace MyRecordCollection.Controllers
 {
@@ -15,13 +16,14 @@ namespace MyRecordCollection.Controllers
 
         public ActionResult Index()
         {
-            var albums = db.Albums.Include(a => a.Artist).Take(18).ToList();
+            // Albums for image gallery (30 random albums)
+            var albums = db.Albums.Include(a => a.Artist).Shuffle(new Random()).Take(30);
 
             HomePageViewModel vm = new HomePageViewModel() 
             {
                 PageTitle = "Welcome to my record collection!",
                 PageSubTitle = "A mix of Punk rock, Punk rock and Punk rock",
-                Albums = albums
+                Albums = albums.ToList()
             };
 
             return View(vm);
