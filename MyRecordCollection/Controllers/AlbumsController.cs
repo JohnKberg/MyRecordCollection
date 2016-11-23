@@ -102,12 +102,11 @@ namespace MyRecordCollection.Controllers
 			return View(album);
 		}
 
-		// GET: Albums/Create
-		public ActionResult Create()
+		// GET: Albums/Add
+		public ActionResult Add()
 		{
 			var vm = new AlbumFormViewModel
 			{
-
 				ArtistsList = GetArtistsSelectListItem()
 			};
 			
@@ -126,9 +125,7 @@ namespace MyRecordCollection.Controllers
 						Value = a.Id.ToString(),
 						Text = a.Name
 					});
-			}
-
-			
+			}			
 			
 			return selList;
 		}

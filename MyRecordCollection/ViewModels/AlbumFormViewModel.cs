@@ -27,8 +27,10 @@ namespace MyRecordCollection.ViewModels
         public string Description { get; set; }
 
         [Url]
+        [Display(Name="Image URL")]
         public string ImageUrl { get; set; }
 
+        [Display(Name="Artist")]
         public int ArtistId { get; set; }
 
         public IEnumerable<SelectListItem> ArtistsList { get; set; }

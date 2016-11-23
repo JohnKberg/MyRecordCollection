@@ -63,8 +63,9 @@ namespace MyRecordCollection.Controllers
             return View(artist);
         }
 
-        // GET: Artists/Create
-        public ActionResult Create()
+
+        // GET: Artists/Add
+        public ActionResult Add()
         {
             var vm = new ArtistFormViewModel();
             

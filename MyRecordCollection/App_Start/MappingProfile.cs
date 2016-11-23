@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using MyRecordCollection.Models;
 using MyRecordCollection.ViewModels;
+using MyRecordCollection.Dtos;
 
 namespace MyRecordCollection
 {
@@ -17,6 +18,9 @@ namespace MyRecordCollection
 
             CreateMap<Album, AlbumFormViewModel>();
             CreateMap<AlbumFormViewModel, Album>();
+
+            CreateMap<Artist, ArtistDto>();
+            CreateMap<ArtistDto, Artist>();
         }
     }
 }
