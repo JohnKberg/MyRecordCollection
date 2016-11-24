@@ -10,7 +10,7 @@
     <div class="panel-body">
         <h4>@Html.DisplayNameFor(model => model.Bio)</h4>
         <hr />
-        <p>@Html.DisplayFor(model => model.Bio)</p>
+        <p>@MyRecordCollection.MyHtmlHelper.DisplayLargeText(Model.Bio)</p>
         @if (Model.Albums.Count > 0)
         {
             <hr />

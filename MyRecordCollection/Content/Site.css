@@ -50,28 +50,6 @@
   -webkit-filter: grayscale(0); /* Google Chrome, Safari 6+ & Opera 15+ */ 
 }
 
-/* Small devices (tablets, 768px and up) */
-@media (min-width: 768px) {
-    .image-gallery img {
-        width:100px;
-    }
-}
-
-/* Medium devices (desktops, 992px and up) */
-@media (min-width: 992px) {
-    .image-gallery img {
-        width:140px;
-    }
-}
-
-/* Large devices (large desktops, 1200px and up) */
-@media (min-width: 1200px) {  
-    .image-gallery img {
-        width:175px;
-    }
-}
-
-
 /* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
@@ -120,3 +98,32 @@ span.glyphicon
     background:transparent;
 }
 
+
+/* Small devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+    .image-gallery img {
+        width:100px;
+    }
+}
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+    .image-gallery img {
+        width:140px;
+    }
+
+    .toolbar-column {
+        min-width: 150px;
+    }
+}
+
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {  
+    .image-gallery img {
+        width:175px;
+    }
+
+    .toolbar-column {
+        min-width: 270px;
+    }
+}

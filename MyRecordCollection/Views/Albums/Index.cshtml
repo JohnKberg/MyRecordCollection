@@ -84,10 +84,10 @@
                             @Html.DisplayFor(modelItem => item.Format)
                         </td>
                         <td data-title="Description" class="hidden-xs hidden-sm">
-                            @Html.DisplayFor(modelItem => item.Description)
+                            @MyRecordCollection.MyHtmlHelper.DisplayLargeText(item.Description, 200)
                         </td>
 
-                        <td data-title="" class="text-right">
+                        <td data-title="" class="text-right toolbar-column">
                             <form action="@Url.Action("Delete", new { id = item.Id })" method="post">
                                 @Html.AntiForgeryToken()
                                 <div class="btn-group" role="group" aria-label="albums toolbar">
