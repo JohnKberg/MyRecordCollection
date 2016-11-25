@@ -91,7 +91,9 @@ namespace MyRecordCollection.Controllers
             }
         }
 
-        //
+        #region ACTIONS TURNED OFF 2016-11-24
+        /*
+
         // GET: /Account/VerifyCode
         [AllowAnonymous]
         public async Task<ActionResult> VerifyCode(string provider, string returnUrl, bool rememberMe)
@@ -384,6 +386,18 @@ namespace MyRecordCollection.Controllers
             ViewBag.ReturnUrl = returnUrl;
             return View(model);
         }
+         
+        //
+        // GET: /Account/ExternalLoginFailure
+        [AllowAnonymous]
+        public ActionResult ExternalLoginFailure()
+        {
+            return View();
+        }
+
+        */
+        #endregion
+
 
         //
         // POST: /Account/LogOff
@@ -395,13 +409,7 @@ namespace MyRecordCollection.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        //
-        // GET: /Account/ExternalLoginFailure
-        [AllowAnonymous]
-        public ActionResult ExternalLoginFailure()
-        {
-            return View();
-        }
+        
 
         protected override void Dispose(bool disposing)
         {

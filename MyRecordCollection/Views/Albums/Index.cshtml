@@ -110,9 +110,13 @@
                                     {
                                         <input type="hidden" name="page" value="@Model.PageNumber" />
                                     }
-                                    <button type="submit" class="btn btn-default js-delete" title="Delete">
-                                        <span class="glyphicon glyphicon-trash"></span><span class="visible-lg-inline">Delete</span>
-                                    </button>
+                                    
+                                    @if (Request.IsAuthenticated)
+                                    {
+                                        <button type="submit" class="btn btn-default js-delete" title="Delete">
+                                            <span class="glyphicon glyphicon-trash"></span><span class="visible-lg-inline">Delete</span>
+                                        </button>
+                                    }
 
                                 </div>
                             </form>

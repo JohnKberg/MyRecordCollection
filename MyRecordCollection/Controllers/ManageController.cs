@@ -50,6 +50,10 @@ namespace MyRecordCollection.Controllers
             }
         }
 
+        #region DISABLE ALL MANAGE FEATURES 2016-11-24
+
+        /*
+
         //
         // GET: /Manage/Index
         public async Task<ActionResult> Index(ManageMessageId? message)
@@ -320,6 +324,10 @@ namespace MyRecordCollection.Controllers
             return result.Succeeded ? RedirectToAction("ManageLogins") : RedirectToAction("ManageLogins", new { Message = ManageMessageId.Error });
         }
 
+        */
+
+        #endregion
+
         protected override void Dispose(bool disposing)
         {
             if (disposing && _userManager != null)
@@ -331,7 +339,7 @@ namespace MyRecordCollection.Controllers
             base.Dispose(disposing);
         }
 
-#region Helpers
+        #region Helpers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
 

@@ -13,11 +13,13 @@ using PagedList;
 
 namespace MyRecordCollection.Controllers
 {
+    [Authorize]
 	public class AlbumsController : Controller
 	{
 		private ApplicationDbContext db = new ApplicationDbContext();
 
 		// GET: Albums
+        [AllowAnonymous]
 		public ActionResult Index(string sortOrder, string searchString, string currentFilter, int? page)
 		{
             int PageSize = 5;
@@ -88,6 +90,7 @@ namespace MyRecordCollection.Controllers
 		}
 
 		// GET: Albums/Details/5
+        [AllowAnonymous]
 		public ActionResult Details(int? id)
 		{
 			if (id == null)

@@ -14,6 +14,7 @@ using AutoMapper;
 
 namespace MyRecordCollection.Controllers.Api
 {
+    [Authorize]
     public class ArtistsController : ApiController
     {
         private ApplicationDbContext db = new ApplicationDbContext();

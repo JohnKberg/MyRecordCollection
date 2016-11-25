@@ -98,6 +98,11 @@ span.glyphicon
     background:transparent;
 }
 
+/* Fix ugly checkbox on Login form */
+.radio input[type='radio'], .radio-inline input[type='radio'], .checkbox input[type='checkbox'], .checkbox-inline input[type='checkbox'] {
+    margin-left: 0; /*-20px;*/
+}
+
 
 /* Small devices (tablets, 768px and up) */
 @media (min-width: 768px) {

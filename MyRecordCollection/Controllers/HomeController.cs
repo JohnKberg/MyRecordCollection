@@ -36,13 +36,6 @@ namespace MyRecordCollection.Controllers
             return View();
         }
 
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
-
         protected override void Dispose(bool disposing)
         {
             if (disposing)
